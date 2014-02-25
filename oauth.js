@@ -7,18 +7,20 @@ var app = express();
 
 app.listen(8000);
 
-var tweets = []
+var appKey= 'hwtsssqlfmntsmhz27p7znfvemiauqzy';
+var appSecret= 'wzlbofn8ppkkvo4q0szeltdx8py3csim';
+var redirect_uri= 'http://localhost:8000/token';
 
 app.get('/', function(req, res) { 
 	res.send('AT&T OAuth Test...')
 })
 
-app.get('/redirect', function(req,res) { 
+app.get('/authorize', function(req,res) { 
 	var authorize= 'https://api.att.com/oauth/authorize?'
-	+'client_id=7rxkasvlp0u3vxcwrbqyxmrtydjj3gtu&'
+	+'client_id='+ appKey +'&'
 	+'scope=MIM,IMMN&'
 	+'redirect_uri='
-	+ encodeURIComponent('http://localhost');
+	+ encodeURIComponent(redirect_uri);
 
 	res.redirect(authorize);
 });
@@ -30,8 +32,8 @@ app.get('/token', function(req,res) {
 	console.log('Received code:' + code);
 
 	// use code to get an access token
-	var jsonData= { client_id:'7rxkasvlp0u3vxcwrbqyxmrtydjj3gtu',
-		  			client_secret: '3oy59mfgl2giszod4pdwe9vwjm7uy5jl',
+	var jsonData= { client_id: appKey,
+		  			client_secret: appSecret,
 		  			grant_type: 'authorization_code',
 		  			code: code
 					};
