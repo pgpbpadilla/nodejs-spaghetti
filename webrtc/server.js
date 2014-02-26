@@ -1,7 +1,9 @@
-var static = require('node-static');
 var http = require('http');
-var file = new(static.Server)();
+var express = require('express');
 
-var app = http.createServer(function (req, res) {
-  file.serve(req, res);
-}).listen(2013);
+var expressApp = express(); 
+expressApp.configure(function(){
+	expressApp.use(express.static(__dirname));
+});
+expressApp.listen(2013);
+

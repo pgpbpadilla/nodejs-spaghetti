@@ -31,7 +31,7 @@ function logMediaError(error){
   console.log(error);
 }
 
-getUserMedia(constraints, setupLocalVideo, logUserMediaError);
+getUserMedia(constraints, setupLocalVideo, logMediaError);
 
 
 
